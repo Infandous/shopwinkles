@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Store</title>
+    <style>
+        /* CSS styles can be added here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav button{
+            cursor: pointer;
+            align-content:flex-end;
+        }
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            flex-direction: row;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .search-bar {
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        .container {
+            margin: 5px auto;
+            text-align: center;
+        }
+        .homepage-content {
+            margin-top: 50px;
+        }
+        .search-container {
+            margin-top: 10px;
+            
+        }
+        .top-buttons {
+            border-radius: 15px;
+            background: #010101;
+            padding: 20px;
+            width: 200px;
+            height: 150px;
+            color: #19AAFF;
+            text-decoration:none;
+        }
+        .sign-in {
+        border-radius: 15px 50px;
+        background: #010101;
+        padding: 20px;
+        width: 200px;
+        height: 150px;
+        color: #19AAFF;
+        text-decoration:none;
+
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul style="margin-bottom:30px;margin-top:30px">
+                <li><a class="top-buttons" href="#">Home</a></li>
+                <li><a class="top-buttons" href="#">Products</a></li>
+                <li><a class="top-buttons" href="#">About Us</a></li>
+                <li><a class="top-buttons" href="#">Contact</a></li>
+                <a class="sign-in" href="/signin.html">Sign In</a>
+            </ul>
+            <div class="search-container">
+            <form class="search-bar" action="db.php" method="GET">
+                <input type="text" name="search" placeholder="Search for products">
+                <button type="submit">Search</button>
+            </form></div>
+        </div>
+    </nav>
+    <div class="container homepage-content">
+        <h1>Welcome to ShopWinkles!</h1>
+        <p>Explore our wide range of products and find what you need.</p>
+        <img src="https://via.placeholder.com/400" alt="Placeholder image">
+    </div>
+</body>
+</html>
