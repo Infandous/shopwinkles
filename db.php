@@ -1,15 +1,17 @@
-
 <?php
 //connect
-$conn = mysqli_connect('mysql.eecs.ku.edu', 'xxxxxxx', 'xxxx', 'xxxxxxx');
+
+echo "We are searching!\n";
+$conn = mysqli_connect('mysql.eecs.ku.edu', '');
 
 if (!$conn) {
     die('Could not connect: ' . mysqli_connect_error());
 }
+echo "Database connected!\n";
 //sanitize
 $search = mysqli_real_escape_string($conn, $_GET['search']);
-
-$query = "SELECT * FROM Product WHERE column_name LIKE '%$search%'";
+echo $search;
+$query = "SELECT * FROM Product WHERE Product.Name LIKE '%$search%'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
