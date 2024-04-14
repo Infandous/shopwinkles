@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retail Store</title>
+    <title>Shopwinkles</title>
     <style>
-        /* CSS styles can be added here */
+        .product-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 200px;
+            background-color: #f9f9f9;
+        }
+
+        .product-box p {
+            margin: 0;
+        }
+
+        .product-box p:first-child {
+            font-weight: bold;
+        }
+
+        .product-box p:not(:first-child) {
+            font-size: 14px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -30,6 +50,17 @@
             display: inline;
             margin-right: 20px;
         }
+        .nav-decor {
+            text-decoration: none;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        .nav-decor:hover {
+            color: #007bff;
+        }
         .search-bar {
             display: inline-block;
             padding: 5px;
@@ -46,43 +77,29 @@
             margin-top: 10px;
             
         }
-        .top-buttons {
-            border-radius: 15px;
-            background: #010101;
-            padding: 20px;
-            width: 200px;
-            height: 150px;
-            color: #19AAFF;
-            text-decoration:none;
+        .signin-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff; 
+            text-decoration: none; 
+            border: none;
+            border-radius: 5px; 
+            cursor: pointer; 
         }
-        .sign-in {
-        border-radius: 15px 50px;
-        background: #010101;
-        padding: 20px;
-        width: 200px;
-        height: 150px;
-        color: #19AAFF;
-        text-decoration:none;
-
+        .signin-button:hover {
+            background-color: #0056b3; 
         }
-
     </style>
 </head>
 <body>
     <nav>
         <div class="container">
-            <ul style="margin-bottom:30px;margin-top:30px">
-                <li><a class="top-buttons" href="#">Home</a></li>
-                <li><a class="top-buttons" href="#">Products</a></li>
-                <li><a class="top-buttons" href="#">About Us</a></li>
-                <li><a class="top-buttons" href="#">Contact</a></li>
-                <a class="sign-in" href="/signin.html">Sign In</a>
-            </ul>
-            <div class="search-container">
-            <form class="search-bar" action="db.php" method="GET">
-                <input type="text" name="search" placeholder="Search for products">
-                <button type="submit">Search</button>
-            </form></div>
+            <ul>
+                <li><a class="nav-decor" href="home.html">Home</a></li>
+                <li><a class="nav-decor" href="product.html">Products</a></li>
+                <li><a class="signin-button" href="signin.html">Sign In</a></li>
+            </ul> 
         </div>
     </nav>
     <div class="container homepage-content">
