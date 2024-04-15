@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+// Check if the user is authenticated and their name is available in the session
+$name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,25 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopwinkles</title>
     <style>
-        .product-box {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 20px;
-            width: 200px;
-            background-color: #f9f9f9;
-        }
-
-        .product-box p {
-            margin: 0;
-        }
-
-        .product-box p:first-child {
+        .user-name{
+            font-family: Arial, sans-serif;
+            color: #555;
+            font-size: 16px;
             font-weight: bold;
-        }
-
-        .product-box p:not(:first-child) {
-            font-size: 14px;
+            padding: 10px;
+            transition: color 0.3s;
         }
 
         body {
@@ -98,7 +92,13 @@
             <ul>
                 <li><a class="nav-decor" href="home.html">Home</a></li>
                 <li><a class="nav-decor" href="product.html">Products</a></li>
-                <li><a class="signin-button" href="signin.html">Sign In</a></li>
+                <?php if ($name): ?>
+                    <li class="user-name">Welcome, <?php echo $name; ?></li>
+                    <li><a class="nav-decor" href="signout.php">Sign Out</a></li>
+                <?php else: ?>
+                    <li><a class="signin-button" href="signin.html">Sign In</a></li>
+                    <li><a class="nav-decor" href="signup.html">Sign Up</a></li>
+                <?php endif; ?>
             </ul> 
         </div>
     </nav>
