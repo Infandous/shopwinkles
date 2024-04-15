@@ -1,4 +1,7 @@
 <?php
+//error reporting if something breaks
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // connect to server
     $conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_j507s861', 'tieTexo3', '447s24_j507s861');
@@ -13,9 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
     // Generate a unique customerID
-    $customerID = substr(uniqid('Cust'), 0, 7);
-    //INSERT INTO `Customer` (`CustomerID`, `Name`, `Address`, `Phone_Number`, `Card_Number`, `CVV`, `Expiry_Date`, `Email`) 
-    //VALUES ('0000000', 'Manual Test', NULL, '0000000000', NULL, NULL, NULL, 'test@manual.test');
+    $customerID = generateUniqueID($conn);
 
     // Prepare SQL query
     $sql = "INSERT INTO Customer (CustomerID, Name, Address, Phone_Number, Card_Number, CVV, Expiry_Date, Password, Email) 
@@ -27,7 +28,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        header("Location: signup.html");
     }
     mysqli_close($conn);
+}
+
+
+function generateUniqueID($conn) {
+    $uniqueID = '';
+    do {
+        //should result in length 11
+        $randomString = generateRandomString(8);
+        $uniqueID = 'Cus' . $randomString;
+        // make sure we didnt generate an ID that already exists
+        $query = "SELECT COUNT(*) AS count FROM Customer WHERE CustomerID = '$uniqueID'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+    } while ($row['count'] > 0);
+    return $uniqueID;
+}
+
+function generateRandomString($length) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
 }
 ?>
