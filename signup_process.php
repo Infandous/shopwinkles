@@ -1,9 +1,9 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // connect to server
     $conn = mysqli_connect('mysql.eecs.ku.edu', '447s24_j507s861', 'tieTexo3', '447s24_j507s861');
-
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+        die('Could not connect: ' . mysqli_connect_error());
     }
 
     // Retrieve form data
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
     // Generate a unique customerID
-    $customerID = uniqid('Cust');
+    $customerID = substr(uniqid('Cust'), 0, 7);
     //INSERT INTO `Customer` (`CustomerID`, `Name`, `Address`, `Phone_Number`, `Card_Number`, `CVV`, `Expiry_Date`, `Email`) 
     //VALUES ('0000000', 'Manual Test', NULL, '0000000000', NULL, NULL, NULL, 'test@manual.test');
 
