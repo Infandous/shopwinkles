@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     $cardnumber = mysqli_real_escape_string($conn, $_POST['cardnumber']);
-    $cvv = mysqli_real_escape_string($conn, $_POST['cvv']);
     $exp_date = mysqli_real_escape_string($conn, $_POST['exp_date']);
 
     if ($name) $updates[] = "name = '$name'";
@@ -25,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password) $updates[] = "password = '$password'";
     if ($address) $updates[] = "address = '$address'";
     if ($cardnumber) $updates[] = "cardnumber = '$cardnumber'";
-    if ($cvv) $updates[] = "cvv = '$cvv'";
     if ($exp_date) $updates[] = "exp_date = '$exp_date'";
 
 
