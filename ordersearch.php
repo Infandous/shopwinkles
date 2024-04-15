@@ -27,28 +27,6 @@ echo '<div class="order-container">';
     echo '<p> Delivery_date' .$row['delivery_date'] . '</p>';
     echo '</div>';
 
-    /*$count = 0;
-    while ($row = mysqli_fetch_assoc($result)) {
-        // Start a new row if count is divisible by 4 (four products per row)
-        if ($count % 4 === 0) {
-            echo '<div class="product-row">';
-        }
-
-        // Display product box
-        echo '<div class="product-box">';
-        echo '<p>' . $row['Name'] . '</p>';
-        echo '<p>Category: ' . $row['Category'] . '</p>';
-        echo '<p>Price: $' . $row['Price'] . '</p>';
-        echo '<p>Rating: ' . ($row['Rating'] ?? 'N/A') . '</p>';
-        echo '</div>';
-
-        // End the row if count is divisible by 4 or it's the last product
-        if (($count + 1) % 4 === 0 || $count === mysqli_num_rows($result) - 1) {
-            echo '</div>'; // End product-row
-        }
-
-        $count++;
-    }*/
 
 echo '</div>';
 $_GET['search'] = '';
