@@ -1,0 +1,134 @@
+<?php
+session_start();
+$name = isset($_SESSION['name']) ? $_SESSION['name'] : NULL;
+if (!$name) {
+    header("Location: signin.html");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            flex-direction: row;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .nav-decor {
+            text-decoration: none;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        .nav-decor:hover {
+            color: #007bff;
+        }
+        .signin-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff; 
+            text-decoration: none; 
+            border: none;
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .signin-button:hover {
+            background-color: #0056b3; 
+        }
+        .user-name{
+            font-family: Arial, sans-serif;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        .container {
+            margin: 5px auto;
+            text-align: center;
+        }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cart-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .item-name {
+            font-weight: bold;
+        }
+        .item-price {
+            color: #007bff;
+        }
+        .checkout {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            padding: 5px 15px;
+            margin-top: 30px;
+        }
+        .checkout:hover {
+            color: #0056b3; 
+            border-color: #0056b3;
+        }
+        .container-check{
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a class="nav-decor" href="home.html">Home</a></li>
+                <li><a class="nav-decor" href="product.html">Products</a></li>
+                <li class="user-name">Welcome, <?php echo $name; ?></li>
+                <li><a class="nav-decor" href="signout.php">Sign Out</a></li>
+            </ul> 
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cart-items">
+            <?php include "display_cart.php"; ?>
+        </div>
+    </div>
+    <div class="container-check">
+        <a class="checkout" href="checkout.html">Checkout</a>
+    </div>  
+</body>
+</html>
