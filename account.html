@@ -2,7 +2,7 @@
 session_start();
 
 // Check if the user is authenticated and their name is available in the session
-$name = isset($_SESSION['name']) ? $_SESSION['name'] : 'guest';
+$name = isset($_SESSION['name']) ? $_SESSION['name'] : NULL;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,28 +113,11 @@ $name = isset($_SESSION['name']) ? $_SESSION['name'] : 'guest';
             border: 1px solid #ccc;
         }
         .container-nav {
-            margin: 5px auto;
+            margin: auto;
             text-align: center;
         }
         .homepage-content {
             margin-top: 50px;
-        }
-        .search-container {
-            margin-top: 10px;
-            
-        }
-        .signin-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff; 
-            text-decoration: none; 
-            border: none;
-            border-radius: 5px; 
-            cursor: pointer; 
-        }
-        .signin-button:hover {
-            background-color: #0056b3; 
         }
     </style>
 </head>
@@ -144,13 +127,15 @@ $name = isset($_SESSION['name']) ? $_SESSION['name'] : 'guest';
             <ul>
                 <li><a class="nav-decor" href="home.html">Home</a></li>
                 <li><a class="nav-decor" href="product.html">Products</a></li>
-                <li><a class="signin-button" href="signin.html">Sign In</a></li>
             </ul>
         </div>
     </nav>
     <div class="acct-container">
         <form class="form" action="account_process.php" method="POST">
-            <h2> <?php echo $name; ?> </h2>
+            <h2> <?php if(!$name){
+                header("Location: signin.html");
+            }
+                echo $name; ?> </h2>
             <br/><br/>
             <h5>Name</h5>
             <input type="text" name="name" placeholder="">
@@ -171,4 +156,3 @@ $name = isset($_SESSION['name']) ? $_SESSION['name'] : 'guest';
     </div>
 </body>
 </html>
-
