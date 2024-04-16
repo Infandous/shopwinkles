@@ -1,0 +1,173 @@
+<?php
+session_start();
+$name = isset($_SESSION['name']) ? $_SESSION['name'] : NULL;
+$customer = isset($_SESSION['customerID']) ? $_SESSION['customerID'] : NULL;
+// Check if the user is authenticated
+if (!$name) {
+    header("Location: signin.html");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav button{
+            cursor: pointer;
+            align-content:flex-end;
+        }
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            flex-direction: row;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .nav-decor {
+            text-decoration: none;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        .nav-decor:hover {
+            color: #007bff;
+        }
+        .signin-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff; 
+            text-decoration: none; 
+            border: none;
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .signin-button:hover {
+            background-color: #0056b3; 
+        }
+        .user-name{
+            font-family: Arial, sans-serif;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s;
+        }    
+        .container {
+            margin: 5px auto;
+            text-align: center;
+        }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cart-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .item-name {
+            font-weight: bold;
+        }
+        .item-price {
+            color: #007bff;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a class="nav-decor" href="home.html">Home</a></li>
+                <li><a class="nav-decor" href="product.html">Products</a></li>
+                <?php if ($name): ?>
+                    <li class="user-name">Welcome, <?php echo $name; ?></li>
+                    <li><a class="nav-decor" href="signout.php">Sign Out</a></li>
+                <?php else: ?>
+                    <li><a class="signin-button" href="signin.html">Sign In</a></li>
+                    <li><a class="nav-decor" href="signup.html">Sign Up</a></li>
+                <?php endif; ?>
+            </ul> 
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cart-items">
+            <?php include "display_cart.php"; ?>
+        </div>
+        <h2>Checkout</h2>
+        <form action="process_checkout.php" method="POST">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <br>
+            <label for="card_number">Card Number:</label>
+            <input type="text" id="card_number" name="card_number" required>
+            <br>
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" required>
+            <br>
+            <label for="expiry_date">Expiry Date:</label>
+            <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" required>
+            <br>
+            <input type="checkbox" id="save_card" name="save_card">
+            <label for="save_card">Save card information for future purchases</label>
+            <br>
+            <input type="submit" value="Submit Order">
+        </form>
+    </div>
+    
+</body>
+</html>
