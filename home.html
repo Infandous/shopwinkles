@@ -93,7 +93,7 @@ $name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
                 <li><a class="nav-decor" href="home.html">Home</a></li>
                 <li><a class="nav-decor" href="product.html">Products</a></li>
                 <?php if ($name): ?>
-                    <li class="user-name">Welcome, <?php echo $name; ?></li>
+                    <li class="user-name"><a class="nav-decor" href="account.html">Welcome, <?php echo $name; ?></a></li>
                     <li><a class="nav-decor" href="signout.php">Sign Out</a></li>
                 <?php else: ?>
                     <li><a class="signin-button" href="signin.html">Sign In</a></li>
