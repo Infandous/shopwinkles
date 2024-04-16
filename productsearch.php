@@ -31,6 +31,12 @@ echo '<div class="product-container">';
         echo '<p>Category: ' . $row['Category'] . '</p>';
         echo '<p>Price: $' . $row['Price'] . '</p>';
         echo '<p>Rating: ' . ($row['Rating'] ?? 'N/A') . '</p>';
+
+        echo '<form action="add_to_cart.php" method="post">';
+        echo '<input type="hidden" name="product_id" value="' . $row['ProductID'] . '">';
+        echo '<button type="submit">Add to Cart</button>';
+        echo '</form>';
+        
         echo '</div>';
 
         // End the row if count is divisible by 4 or it's the last product
