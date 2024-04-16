@@ -1,5 +1,4 @@
 <?php
-//error reporting if something breaks
 //error_reporting(E_ALL);
 //ini_set('display_errors', 1);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    // Generate a unique customerID
+    // generate uniquie customerID
     $customerID = generateUniqueID($conn);
 
-    // Prepare SQL query
+    // write query
     $sql = "INSERT INTO Customer (CustomerID, Name, Address, Phone_Number, Card_Number, CVV, Expiry_Date, Password, Email) 
     VALUES ('$customerID', '$name', NULL, '$phone', NULL, NULL, NULL, '$password', '$email')";
 
