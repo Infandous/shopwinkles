@@ -1,8 +1,5 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -29,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     while ($row = mysqli_fetch_assoc($result)) {
         $order_id = $row['OrderID'];
 
-        // Update Date_Purchased for the current OrderID
+        // update Date_Purchased for the current OrderID
         $update_sql = "UPDATE OrderInfo 
         SET Date_Purchased = CURRENT_TIMESTAMP, 
             Expected_Delivery = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 3 DAY) WHERE OrderID = '$order_id' AND CustomerID = '$customer_id'";
