@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+
     $address = $_POST['address'];
     $card_number = $_POST['card_number'];
     $cvv = $_POST['cvv'];
@@ -26,20 +26,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     while ($row = mysqli_fetch_assoc($result)) {
         $order_id = $row['OrderID'];
 
-        // update Date_Purchased for the current OrderID
-        $update_sql = "UPDATE OrderInfo 
+        //update Date_Purchased for the current OrderID
+        $update_query = "UPDATE OrderInfo 
         SET Date_Purchased = CURRENT_TIMESTAMP, 
             Expected_Delivery = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 3 DAY) WHERE OrderID = '$order_id' AND CustomerID = '$customer_id'";
         if (mysqli_query($conn, $update_sql)) {
             $_SESSION['order_id'] = $order_id;
-            header("Location: order_successful.html");
-            exit();
+
+            $update_inventory_query = "UPDATE Inventory SET Quantity = Quantity - 1 WHERE ProductID IN (SELECT ProductID FROM OrderInfo WHERE OrderID = '$order_id')";
+            if (mysqli_query($conn, $update_inventory_sql)) {
+                header("Location: order_successful.html");
+                exit();
+            } else {
+                echo "Error updating inventory: " . mysqli_error($conn);
+            }
         } else {
             echo "Error: " . mysqli_error($conn);
         }
     }
     
     mysqli_close($conn);
-    
 }
 ?>
